@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vexgo7 - Tienda Online</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!-- Encabezado de Vexgo7 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3 text-warning" href="#">Vexgo7 🛍️</a>
+        </div>
+    </nav>
+
+    <!-- Catálogo de Productos -->
+    <div class="container my-5">
+        <h1 class="text-center mb-4 fw-bold">Nuestros Productos</h1>
+        <div class="row">
+            {% for producto in productos %}
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">Sin Imagen</div>
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">{{ producto.nombre }}</h5>
+                        <p class="card-text text-muted flex-grow-1">{{ producto.descripcion|default:"Sin descripción" }}</p>
+                        <h4 class="text-success fw-bold">S/ {{ producto.precio }}</h4>
+                        <button class="btn btn-primary mt-3 w-100">Añadir al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <h3>Aún no hay productos registrados en Vexgo7.</h3>
+                <p>Agrega algunos desde el panel de administración.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
